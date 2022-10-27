@@ -7,15 +7,15 @@
   
   <title>面试总结 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、Vue2和Vue3响应式原理Vue2通过Object.defineProperty和setter、getter做了对象的劫持直接修改数组length监听不到，处理数组是重写这些改变原数组的原型方法push&#x2F;pop&#x2F;shift&#x2F;splice Vue3是通过proxy,对操作数组比较友好">
+  <meta name="description" content="1、Vue2和Vue3响应式原理Vue2通过Object.defineProperty和setter、getter做了对象的劫持直接修改数组length监听不到，处理数组是重写这些改变原数组的原型方法push&#x2F;pop&#x2F;shift&#x2F;splice Vue3是通过proxy,对操作数组比较友好 1、Vue3新特性新增了 patch flag静态标记 不去做全量对比，根据标记进行对比，提升性能新增Frag">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试总结">
 <meta property="og:url" content="http://example.com/2022/10/20/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1、Vue2和Vue3响应式原理Vue2通过Object.defineProperty和setter、getter做了对象的劫持直接修改数组length监听不到，处理数组是重写这些改变原数组的原型方法push&#x2F;pop&#x2F;shift&#x2F;splice Vue3是通过proxy,对操作数组比较友好">
+<meta property="og:description" content="1、Vue2和Vue3响应式原理Vue2通过Object.defineProperty和setter、getter做了对象的劫持直接修改数组length监听不到，处理数组是重写这些改变原数组的原型方法push&#x2F;pop&#x2F;shift&#x2F;splice Vue3是通过proxy,对操作数组比较友好 1、Vue3新特性新增了 patch flag静态标记 不去做全量对比，根据标记进行对比，提升性能新增Frag">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-20T12:54:32.000Z">
-<meta property="article:modified_time" content="2022-10-26T12:57:17.984Z">
+<meta property="article:modified_time" content="2022-10-26T13:33:38.440Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Vue3、react">
 <meta name="twitter:card" content="summary">
@@ -91,6 +91,7 @@
       
         <h3 id="1、Vue2和Vue3响应式原理"><a href="#1、Vue2和Vue3响应式原理" class="headerlink" title="1、Vue2和Vue3响应式原理"></a>1、Vue2和Vue3响应式原理</h3><p>Vue2通过<code>Object.defineProperty</code>和setter、getter做了对象的劫持<br>直接修改数组length监听不到，处理数组是重写这些改变原数组的原型方法push/pop/shift/splice</p>
 <p>Vue3是通过proxy,对操作数组比较友好</p>
+<h3 id="1、Vue3新特性"><a href="#1、Vue3新特性" class="headerlink" title="1、Vue3新特性"></a>1、Vue3新特性</h3><p>新增了 patch flag静态标记 不去做全量对比，根据标记进行对比，提升性能<br>新增Fragments 支持多个根标签<br>新增tree shaking 用watch，就引入watch 其他computed没用到的就不会打包减小体积<br>新增composition API setup语法糖</p>
 
       
     </div>
@@ -137,7 +138,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue2-Vuex-Vue-router/" rel="tag">Vue2 Vuex Vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3%E3%80%81react/" rel="tag">Vue3、react</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue2-JS/" rel="tag">Vue2 JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue2-Vuex-Vue-router/" rel="tag">Vue2 Vuex Vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3%E3%80%81react/" rel="tag">Vue3、react</a></li></ul>
     </div>
   </div>
 
@@ -147,7 +148,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Vue2-Vuex-Vue-router/" style="font-size: 10px;">Vue2 Vuex Vue-router</a> <a href="/tags/Vue3/" style="font-size: 10px;">Vue3</a> <a href="/tags/Vue3%E3%80%81react/" style="font-size: 10px;">Vue3、react</a>
+      <a href="/tags/Vue2-JS/" style="font-size: 10px;">Vue2 JS</a> <a href="/tags/Vue2-Vuex-Vue-router/" style="font-size: 10px;">Vue2 Vuex Vue-router</a> <a href="/tags/Vue3/" style="font-size: 10px;">Vue3</a> <a href="/tags/Vue3%E3%80%81react/" style="font-size: 10px;">Vue3、react</a>
     </div>
   </div>
 
@@ -185,7 +186,7 @@
           </li>
         
           <li>
-            <a href="/2021/03/25/Vue3/">Vue3的学习笔记</a>
+            <a href="/2021/10/01/%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">一些关于Vue2的笔记</a>
           </li>
         
       </ul>

@@ -179,6 +179,7 @@
       
         <h3 id="1、Vue2和Vue3响应式原理"><a href="#1、Vue2和Vue3响应式原理" class="headerlink" title="1、Vue2和Vue3响应式原理"></a>1、Vue2和Vue3响应式原理</h3><p>Vue2通过<code>Object.defineProperty</code>和setter、getter做了对象的劫持<br>直接修改数组length监听不到，处理数组是重写这些改变原数组的原型方法push/pop/shift/splice</p>
 <p>Vue3是通过proxy,对操作数组比较友好</p>
+<h3 id="1、Vue3新特性"><a href="#1、Vue3新特性" class="headerlink" title="1、Vue3新特性"></a>1、Vue3新特性</h3><p>新增了 patch flag静态标记 不去做全量对比，根据标记进行对比，提升性能<br>新增Fragments 支持多个根标签<br>新增tree shaking 用watch，就引入watch 其他computed没用到的就不会打包减小体积<br>新增composition API setup语法糖</p>
 
       
     </div>
@@ -271,6 +272,49 @@
 
 
   
+    <article id="post-遇到问题总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/10/01/%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2021-10-01T14:44:40.000Z" itemprop="datePublished">2021-10-01</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/10/01/%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">一些关于Vue2的笔记</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="进度条功能，进度条未到100-时，轮询请求接口"><a href="#进度条功能，进度条未到100-时，轮询请求接口" class="headerlink" title="进度条功能，进度条未到100%时，轮询请求接口"></a>进度条功能，进度条未到100%时，轮询请求接口</h2><p>使用到：闭包、垃圾回收、Vue生命周期</p>
+<p>闭包:函数内嵌套函数，内部函数当做返回值<br>在Vue beforeDestory销毁定时器，做垃圾回收，防止内存的消耗</p>
+<h2 id="手写节流和防抖"><a href="#手写节流和防抖" class="headerlink" title="手写节流和防抖"></a>手写节流和防抖</h2><p>函数节流：规定在一个单位时间内，只能触发一次函数，如果这个单位时间内触发多次函数，只有一次生效； 典型的案例就是鼠标不断点击触发，规定在n秒内多次点击只有一次生效<br>函数防抖：在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时；典型的案例就是输入搜索：输入结束后n秒才进行搜索请求，n秒内又输入的内容，就重新计时</p>
+<p>手写防抖：<br><code>function debounce(fn,delay=1000)&#123;</code><br>  <code>let timer</code><br> <code>return function()&#123;</code><br>  <code>let args = arguments</code><br>  <code>let context = this</code><br>  <code>clearTimeout(timer)</code><br>  <code>timer = setTimeout(()=&gt;&#123;</code><br>   <code>fn.apply(context,args)</code><br>   <code>timer = null</code><br>  <code>&#125;,delay)</code><br> <code>&#125;</code><br> <code>&#125;</code></p>
+<p><code>function throttle(fn,delay=1000)&#123;</code><br> <code>let timer</code><br> <code>return function()&#123;</code><br>  <code>let args = arguments</code><br> <code>let context = this</code><br>  <code>if(!timer)&#123;</code><br>   <code>timer = setTimeout(()=&gt;&#123;</code><br>    <code>fn.apply(context,args)</code><br>    <code>timer = null</code><br>   <code>&#125;,delay)</code><br>  <code>&#125;</code><br> <code>&#125;</code><br><code>&#125;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/10/01/%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/" data-id="cl9qnqptv0000u8uk6ggq9dy3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue2-JS/" rel="tag">Vue2 JS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Vue3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2021/03/25/Vue3/" class="article-date">
@@ -301,6 +345,27 @@
 <h2 id="api风格"><a href="#api风格" class="headerlink" title="api风格"></a>api风格</h2><p>组合式 API (Composition API)</p>
 <h2 id="构建工具"><a href="#构建工具" class="headerlink" title="构建工具"></a>构建工具</h2><p>Vite</p>
 <h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><p>重写双向数据绑定<br>VDOM性能瓶颈<br>Fragments<br>Tree-shaking的支持<br>composition API</p>
+<p>diff算法原理</p>
+<p>ref/isRef/shallowRef 设置响应式属性（支持所有类型）<br>ref、shallowRef不能一起写 有影响<br>ref:深层次的<br>shallowRef：浅层次的<br>ref还可以获取dom元素</p>
+<p>reactive 设置响应式对象和数组(支持引用类型)<br>reactive proxy不能直接赋值 会破坏响应式 解决方案 数组 使用 push+解构<br>toRef 设置响应式对象的值<br>toRefs 把对象中每个key都设置成响应式的 适用于解构场景<br>toRaw 把响应式对象转成一般对象</p>
+<p>computed 计算属性<br>arr.reduce 累加器</p>
+<p>watch 监听器<br>watchEffect 高级监听器</p>
+<p>生命周期<br>setup onBeforeMount onMounted onBeforeUpdate onUpdated onBeforeUnmount onUnmounted</p>
+<p>父子组件传参<br>defineProps、defineEmits、defineExpose<br>ts专有：withDefaults 传参默认值</p>
+<p>全局组件 局部组件 递归组件</p>
+<p>?? .? 语法</p>
+<p>动态组件</p>
+<p>插槽 slot（占位符）<br>作用域插槽 父组件拿到子组件的值<br>动态插槽</p>
+<p>性能优化<br>异步组件&amp;代码分包&amp;suspense</p>
+<p>teleport传送组件</p>
+<p>keep-alive缓存组件 会有两个新的生命周期函数onActivated onDeactivated</p>
+<p>动画 transtion</p>
+<p>深度嵌套的组件使用依赖注入Provide/inject</p>
+<p>父子组件传参 A-&gt;父-&gt;B  或者订阅发布模式Bus Bus.emit Bus.on 第三方插件mitt</p>
+<p>TSX语法 模仿JSX</p>
+<p>自动引入vue模块（ref，reactive，watch）插件 unplugin-auto-import 自动引入</p>
+<p>v-model 父子组件通信</p>
+<p>自定义指令 Directive</p>
 
       
     </div>
@@ -330,7 +395,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue2-Vuex-Vue-router/" rel="tag">Vue2 Vuex Vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3%E3%80%81react/" rel="tag">Vue3、react</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue2-JS/" rel="tag">Vue2 JS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue2-Vuex-Vue-router/" rel="tag">Vue2 Vuex Vue-router</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3/" rel="tag">Vue3</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue3%E3%80%81react/" rel="tag">Vue3、react</a></li></ul>
     </div>
   </div>
 
@@ -340,7 +405,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Vue2-Vuex-Vue-router/" style="font-size: 10px;">Vue2 Vuex Vue-router</a> <a href="/tags/Vue3/" style="font-size: 10px;">Vue3</a> <a href="/tags/Vue3%E3%80%81react/" style="font-size: 10px;">Vue3、react</a>
+      <a href="/tags/Vue2-JS/" style="font-size: 10px;">Vue2 JS</a> <a href="/tags/Vue2-Vuex-Vue-router/" style="font-size: 10px;">Vue2 Vuex Vue-router</a> <a href="/tags/Vue3/" style="font-size: 10px;">Vue3</a> <a href="/tags/Vue3%E3%80%81react/" style="font-size: 10px;">Vue3、react</a>
     </div>
   </div>
 
@@ -378,7 +443,7 @@
           </li>
         
           <li>
-            <a href="/2021/03/25/Vue3/">Vue3的学习笔记</a>
+            <a href="/2021/10/01/%E9%81%87%E5%88%B0%E9%97%AE%E9%A2%98%E6%80%BB%E7%BB%93/">一些关于Vue2的笔记</a>
           </li>
         
       </ul>
