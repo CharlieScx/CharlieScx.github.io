@@ -5,19 +5,19 @@
   
 
   
-  <title>面试总结 | Hexo</title>
+  <title>关于影像项目的复盘 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1、Vue2和Vue3响应式原理Vue2通过Object.defineProperty和setter、getter做了对象的劫持直接修改数组length监听不到，处理数组是重写这些改变原数组的原型方法push&#x2F;pop&#x2F;shift&#x2F;splice Vue3是通过proxy,对操作数组比较友好 1、Vue3新特性新增了 patch flag静态标记 不去做全量对比，根据标记进行对比，提升性能新增Frag">
+  <meta name="description" content="基础逻辑页面布局：大组件分为树组件 主操作区组件 工具栏1、目录树的封装2、标签树：通过修改node节点的属性控制img标签src属性的变化 标签图片资源通过import从assets文件夹引入目录树结构：dir-doctype-doc-file快速点击做防抖，点击同一节点取消请求，节约资源设置文档的查看权限 使用会话存储判断节点到期时间树节点递归查找：递归把所有符合条件的数据存放在一个数组里父组">
 <meta property="og:type" content="article">
-<meta property="og:title" content="面试总结">
-<meta property="og:url" content="http://example.com/2022/10/20/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/index.html">
+<meta property="og:title" content="关于影像项目的复盘">
+<meta property="og:url" content="http://example.com/2022/10/25/%E5%BD%B1%E5%83%8F%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1、Vue2和Vue3响应式原理Vue2通过Object.defineProperty和setter、getter做了对象的劫持直接修改数组length监听不到，处理数组是重写这些改变原数组的原型方法push&#x2F;pop&#x2F;shift&#x2F;splice Vue3是通过proxy,对操作数组比较友好 1、Vue3新特性新增了 patch flag静态标记 不去做全量对比，根据标记进行对比，提升性能新增Frag">
+<meta property="og:description" content="基础逻辑页面布局：大组件分为树组件 主操作区组件 工具栏1、目录树的封装2、标签树：通过修改node节点的属性控制img标签src属性的变化 标签图片资源通过import从assets文件夹引入目录树结构：dir-doctype-doc-file快速点击做防抖，点击同一节点取消请求，节约资源设置文档的查看权限 使用会话存储判断节点到期时间树节点递归查找：递归把所有符合条件的数据存放在一个数组里父组">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-10-20T12:54:32.000Z">
-<meta property="article:modified_time" content="2022-10-26T13:33:38.440Z">
+<meta property="article:published_time" content="2022-10-25T15:44:40.000Z">
+<meta property="article:modified_time" content="2022-11-01T06:37:38.600Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Vue3、react">
+<meta property="article:tag" content="Vue2 Vuex Vue-router">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -67,10 +67,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-面试总结" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-影像项目总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2022/10/20/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" class="article-date">
-  <time datetime="2022-10-20T12:54:32.000Z" itemprop="datePublished">2022-10-20</time>
+    <a href="/2022/10/25/%E5%BD%B1%E5%83%8F%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2022-10-25T15:44:40.000Z" itemprop="datePublished">2022-10-25</time>
 </a>
     
   </div>
@@ -81,7 +81,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      面试总结
+      关于影像项目的复盘
     </h1>
   
 
@@ -89,17 +89,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1、Vue2和Vue3响应式原理"><a href="#1、Vue2和Vue3响应式原理" class="headerlink" title="1、Vue2和Vue3响应式原理"></a>1、Vue2和Vue3响应式原理</h3><p>Vue2通过<code>Object.defineProperty</code>和setter、getter做了对象的劫持<br>直接修改数组length监听不到，处理数组是重写这些改变原数组的原型方法push/pop/shift/splice</p>
-<p>Vue3是通过proxy,对操作数组比较友好</p>
-<h3 id="1、Vue3新特性"><a href="#1、Vue3新特性" class="headerlink" title="1、Vue3新特性"></a>1、Vue3新特性</h3><p>新增了 patch flag静态标记 不去做全量对比，根据标记进行对比，提升性能<br>新增Fragments 支持多个根标签<br>新增tree shaking 用watch，就引入watch 其他computed没用到的就不会打包减小体积<br>新增composition API setup语法糖</p>
+        <h2 id="基础逻辑"><a href="#基础逻辑" class="headerlink" title="基础逻辑"></a>基础逻辑</h2><p>页面布局：大组件分为树组件 主操作区组件 工具栏<br>1、目录树的封装<br>2、标签树：通过修改node节点的属性控制img标签src属性的变化 标签图片资源通过import从assets文件夹引入<br>目录树结构：dir-doctype-doc-file<br>快速点击做防抖，点击同一节点取消请求，节约资源<br>设置文档的查看权限 使用会话存储判断节点到期时间<br>树节点递归查找：递归把所有符合条件的数据存放在一个数组里<br>父组件将树的数据通过props传给tree组件，tree组件重新创建变量接收，在新的变量上修改；<br>给树加标签的同时给影像加水印<br>批注功能本来只是文字注释，后来需求变更不只是文本批注、还要直线、划线、矩形、高亮等等 有点复杂<br>批量下载  file-saver 和 jszip插件<br>工具栏 根据按钮的功能分成一次性功能还是保存当前状态的按钮（如局部放大，选框放大，手型拖拽）<br>还要判断按钮之前的共存性。如手型工具和局部方法不能同时使用，这是对工具栏绑定解绑功能  includes方法代替indexOf<br>先绑定，再解绑过滤工具栏</p>
+<p>文件展示：打开word mammoth.js；查看Excel   sheetjs；查看下载pdf； pdf.js;音视频video<br>前端利用exif.js+canvas压缩上传图片</p>
+<h2 id="项目难点"><a href="#项目难点" class="headerlink" title="项目难点"></a>项目难点</h2><p>基础影像操作：包含旋转、缩放、拖手、放大镜、选框放大功能；<br>其他影像操作：打印，水印，缩略图、图片比较、添加注释</p>
+<p>cropper.js + canvas 图层嵌套过于复杂 耦合性强 独立性比较差 功能复杂 需要考虑很多，多功能联动，经常会出现意想不到bug</p>
+<p>递归遍历树根据文档编号，页码，文件类型判断定位影像；fabric.js很好用的 canvas 操作插件；工具函数模块化</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/10/20/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/" data-id="cl9po3g610005b4uk4yzv1yg0" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/10/25/%E5%BD%B1%E5%83%8F%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" data-id="cl9xuav2g0000z4ukcsdm92wo" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue3%E3%80%81react/" rel="tag">Vue3、react</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue2-Vuex-Vue-router/" rel="tag">Vue2 Vuex Vue-router</a></li></ul>
 
     </footer>
   </div>
@@ -107,19 +109,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2022/10/25/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2022/10/28/%E7%AD%94%E6%A1%88/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Hello World
+          (no title)
         
       </div>
     </a>
   
   
-    <a href="/2021/10/25/Vue2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2022/10/25/react-books/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">一些关于Vue2的笔记</div>
+      <div class="article-nav-title">react</div>
     </a>
   
 </nav>

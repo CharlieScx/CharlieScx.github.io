@@ -90,6 +90,49 @@
 
 
   
+    <article id="post-影像项目总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2022/10/25/%E5%BD%B1%E5%83%8F%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" class="article-date">
+  <time datetime="2022-10-25T15:44:40.000Z" itemprop="datePublished">2022-10-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2022/10/25/%E5%BD%B1%E5%83%8F%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">关于影像项目的复盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="基础逻辑"><a href="#基础逻辑" class="headerlink" title="基础逻辑"></a>基础逻辑</h2><p>页面布局：大组件分为树组件 主操作区组件 工具栏<br>1、目录树的封装<br>2、标签树：通过修改node节点的属性控制img标签src属性的变化 标签图片资源通过import从assets文件夹引入<br>目录树结构：dir-doctype-doc-file<br>快速点击做防抖，点击同一节点取消请求，节约资源<br>设置文档的查看权限 使用会话存储判断节点到期时间<br>树节点递归查找：递归把所有符合条件的数据存放在一个数组里<br>父组件将树的数据通过props传给tree组件，tree组件重新创建变量接收，在新的变量上修改；<br>给树加标签的同时给影像加水印<br>批注功能本来只是文字注释，后来需求变更不只是文本批注、还要直线、划线、矩形、高亮等等 有点复杂<br>批量下载  file-saver 和 jszip插件<br>工具栏 根据按钮的功能分成一次性功能还是保存当前状态的按钮（如局部放大，选框放大，手型拖拽）<br>还要判断按钮之前的共存性。如手型工具和局部方法不能同时使用，这是对工具栏绑定解绑功能  includes方法代替indexOf<br>先绑定，再解绑过滤工具栏</p>
+<p>文件展示：打开word mammoth.js；查看Excel   sheetjs；查看下载pdf； pdf.js;音视频video<br>前端利用exif.js+canvas压缩上传图片</p>
+<h2 id="项目难点"><a href="#项目难点" class="headerlink" title="项目难点"></a>项目难点</h2><p>基础影像操作：包含旋转、缩放、拖手、放大镜、选框放大功能；<br>其他影像操作：打印，水印，缩略图、图片比较、添加注释</p>
+<p>cropper.js + canvas 图层嵌套过于复杂 耦合性强 独立性比较差 功能复杂 需要考虑很多，多功能联动，经常会出现意想不到bug</p>
+<p>递归遍历树根据文档编号，页码，文件类型判断定位影像；fabric.js很好用的 canvas 操作插件；工具函数模块化</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2022/10/25/%E5%BD%B1%E5%83%8F%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/" data-id="cl9xuav2g0000z4ukcsdm92wo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue2-Vuex-Vue-router/" rel="tag">Vue2 Vuex Vue-router</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="react title: books-react-books" class="article article-type-react title: books" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2022/10/25/react-books/" class="article-date">
@@ -114,6 +157,7 @@
       
         <h2 id="英文缩写"><a href="#英文缩写" class="headerlink" title="英文缩写"></a>英文缩写</h2><p>IDE：“集成开发环境”,是用于提供程序开发环境的应用程序,是集成了代码编写功能、分析功能、编译功能、调试功能等一体化的开发软件服务套。</p>
 <p>CDN：即内容分发网络。CDN是构建在网络之上的内容分发网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率</p>
+<p>DNS：请求某域名下的资源，浏览器需要先通过 DNS 解析器得到该域名服务器的 IP 地址</p>
 <hr>
 <h2 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h2><p>内容</p>
 <hr>
@@ -273,13 +317,21 @@
 <h4 id="性能优化"><a href="#性能优化" class="headerlink" title="性能优化"></a>性能优化</h4><p>缓存</p>
 <p>缓存的本质是首轮计算后将结果保存下来，下次直接复用计算结果而跳过计算过程</p>
 <ul>
-<li>webpack5 使用cache 功能,使用持久化缓存 <code>cache.type = &#39;filesystem&#39;</code> 即可开启</li>
+<li>webpack5 使用cache 功能,使用持久化缓存 <code>cache.type = &#39;filesystem&#39;</code> 即可开启，它能够将首次构建结果持久化到本地文件系统，在下次执行构建时跳过一系列解析、链接、编译等非常消耗性能的操作，直接复用 module、chunk 的构建结果。</li>
 <li>Webpack 4 及之前使用一些 <code>loader</code>自带的缓存功能提升构建性能，例如 <code>babel-loader</code>、<code>eslint-loader</code>、<code>cache-loader</code></li>
 <li>require.context() 常常用来在组件内批量导入多个组件</li>
 </ul>
 <p>多线程打包</p>
 <p>并行的本质则是在同一时间内并发执行多个运算，提升单位时间计算效率<br>受限于 Node.js 的单线程架构，原生 Webpack 对所有资源文件做的所有解析、转译、合并操作本质上都是在同一个线程内串行执行，CPU 利用率极低，因此，理所当然地社区出现了一些基于多进程方式运行 Webpack</p>
 <p>方案：使用 Thread-loader<br>使用方法：首先，需要安装 Thread-loader 依赖：<br><code>yarn add -D thread-loader</code><br>其次，需要将 Thread-loader 配置到 loader 数组首位，确保最先运行<br>原理：创建工作子进程，并将Loader 列表、文件路径、上下文等参数传递到子进程，子进程中调用 <code>loader-runner</code>，转译文件内容,转译完毕后，将结果传回主进程</p>
+<p>针对Vue cli搭建项目<br>在vue.config.js 导出的配置对象中，通过添加 configureWebpack 或 chainWebpack 节点来自定义打包配置。</p>
+<p>configureWebpack 与 chainWebpack 作用相同，唯一区别是它们修改webpack配置方式不同：</p>
+<p>chainWebpack 通过 链式编程 的方式，来修改默认的配置。<br>configureWebpack 通过 操作对象 的方式，来修改默认的配置。</p>
+<p> // 配置externals节点，来加载外部cdn资源，在此声明的第三方依赖包都不会被打包，缩小打包体积</p>
+<p>webpack3 CommonsChunkPlugin 用来提取第三方库和公共模块 webpack运行文件<br> webpack4 SplitChunks chunk-vendors.js这个文件非常大，那是因为webpack将所有的依赖全都压缩到了这个文件里面，这时我们可以将其拆分，将所有的依赖都打包成单独的js</p>
+<p> 请问前端页面优化的方式有哪些？大家也是能够信手拈来的说出缓存、压缩文件、css雪碧图以及部署CDN等等各种方法，但是今天不一样了，可能你去面试问的就是，请问你是否知道webpack的打包原理，webpack的打包优化方法有哪些？</p>
+<p> webpack优化方式总结：</p>
+<p>1、优化模块查找路径<br>2、剔除不必要的无用的模块<br>3、设置缓存：缓存loader的执行结果(cacheDirectory/cache-loader)<br>4、设置多线程：HappyPack/thread-loader<br>5、dllplugin提取第三方库<br>当然，这是针对开发的优化，如果是针对部署上的优化呢？我们可以设置splitchunk、按需加载、部署CDN等，这里就不展开了。</p>
 <p>Vite</p>
 <h4 id="为什么使用Vite？"><a href="#为什么使用Vite？" class="headerlink" title="为什么使用Vite？"></a>为什么使用Vite？</h4><p>vite服务器启动速度比webpack快，由于vite启动的时候不需要打包，也就无需分析模块依赖、编译，所以启动速度非常快。当浏览器请求需要的模块时，再对模块进行编译，这种按需动态编译的模式，极大缩短了编泽时间，<br>当项目越大，文件越多时，vite的开发时优势越明显。vite热更新比webpack快，vite在HRM方面，当某个模块内容改变时，让浏览器去重新请求该模块即可，而不是像webpack重新将该模块的所有依赖重新编译</p>
 
@@ -325,7 +377,28 @@
 <h2 id="手写节流和防抖"><a href="#手写节流和防抖" class="headerlink" title="手写节流和防抖"></a>手写节流和防抖</h2><p>函数节流：规定在一个单位时间内，只能触发一次函数，如果这个单位时间内触发多次函数，只有一次生效； 典型的案例就是鼠标不断点击触发，规定在n秒内多次点击只有一次生效<br>函数防抖：在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时；典型的案例就是输入搜索：输入结束后n秒才进行搜索请求，n秒内又输入的内容，就重新计时</p>
 <p>手写防抖：<br><code>function debounce(fn,delay=1000)&#123;</code><br>  <code>let timer</code><br> <code>return function()&#123;</code><br>  <code>let args = arguments</code><br>  <code>let context = this</code><br>  <code>clearTimeout(timer)</code><br>  <code>timer = setTimeout(()=&gt;&#123;</code><br>   <code>fn.apply(context,args)</code><br>   <code>timer = null</code><br>  <code>&#125;,delay)</code><br> <code>&#125;</code><br> <code>&#125;</code></p>
 <p><code>function throttle(fn,delay=1000)&#123;</code><br> <code>let timer</code><br> <code>return function()&#123;</code><br>  <code>let args = arguments</code><br> <code>let context = this</code><br>  <code>if(!timer)&#123;</code><br>   <code>timer = setTimeout(()=&gt;&#123;</code><br>    <code>fn.apply(context,args)</code><br>    <code>timer = null</code><br>   <code>&#125;,delay)</code><br>  <code>&#125;</code><br> <code>&#125;</code>o<br><code>&#125;</code></p>
-<h2 id="echars大屏自适应展示"><a href="#echars大屏自适应展示" class="headerlink" title="echars大屏自适应展示"></a>echars大屏自适应展示</h2><h2 id="单页面应用的弊端，如何优化"><a href="#单页面应用的弊端，如何优化" class="headerlink" title="单页面应用的弊端，如何优化"></a>单页面应用的弊端，如何优化</h2><h2 id="懒加载和预加载实现原理-getBoundingClientRect-clientHeight"><a href="#懒加载和预加载实现原理-getBoundingClientRect-clientHeight" class="headerlink" title="懒加载和预加载实现原理  getBoundingClientRect() clientHeight"></a>懒加载和预加载实现原理  getBoundingClientRect() clientHeight</h2><h2 id="对象深拷贝和浅拷贝-JSON-parse-JSON-stringify-递归-首层深拷贝：object-assign-或者-…"><a href="#对象深拷贝和浅拷贝-JSON-parse-JSON-stringify-递归-首层深拷贝：object-assign-或者-…" class="headerlink" title="对象深拷贝和浅拷贝  JSON.parse(JSON.stringify()) 递归 首层深拷贝：object.assign()或者(…)"></a>对象深拷贝和浅拷贝  JSON.parse(JSON.stringify()) 递归 首层深拷贝：object.assign()或者(…)</h2><h2 id="数组首层深拷贝-concat-slice"><a href="#数组首层深拷贝-concat-slice" class="headerlink" title="数组首层深拷贝 concat/slice"></a>数组首层深拷贝 concat/slice</h2>
+<h2 id="echars大屏自适应展示"><a href="#echars大屏自适应展示" class="headerlink" title="echars大屏自适应展示"></a>echars大屏自适应展示</h2><h2 id="单页面应用的弊端，如何优化"><a href="#单页面应用的弊端，如何优化" class="headerlink" title="单页面应用的弊端，如何优化"></a>单页面应用的弊端，如何优化</h2><h2 id="懒加载和预加载实现原理-getBoundingClientRect-clientHeight"><a href="#懒加载和预加载实现原理-getBoundingClientRect-clientHeight" class="headerlink" title="懒加载和预加载实现原理  getBoundingClientRect() clientHeight"></a>懒加载和预加载实现原理  getBoundingClientRect() clientHeight</h2><h2 id="对象深拷贝和浅拷贝-JSON-parse-JSON-stringify-递归-首层深拷贝：object-assign-或者-…"><a href="#对象深拷贝和浅拷贝-JSON-parse-JSON-stringify-递归-首层深拷贝：object-assign-或者-…" class="headerlink" title="对象深拷贝和浅拷贝  JSON.parse(JSON.stringify()) 递归 首层深拷贝：object.assign()或者(…)"></a>对象深拷贝和浅拷贝  JSON.parse(JSON.stringify()) 递归 首层深拷贝：object.assign()或者(…)</h2><h2 id="数组首层深拷贝-concat-slice"><a href="#数组首层深拷贝-concat-slice" class="headerlink" title="数组首层深拷贝 concat/slice"></a>数组首层深拷贝 concat/slice</h2><h2 id="数组forEach中断循环使用some、evevy方法替代"><a href="#数组forEach中断循环使用some、evevy方法替代" class="headerlink" title="数组forEach中断循环使用some、evevy方法替代"></a>数组forEach中断循环使用some、evevy方法替代</h2><h2 id="vue-mixin的缺点-Vue3用hook代替"><a href="#vue-mixin的缺点-Vue3用hook代替" class="headerlink" title="vue mixin的缺点  Vue3用hook代替"></a>vue mixin的缺点  Vue3用hook代替</h2><h2 id="Vue子组件修改父组件的值-emit-sync-update"><a href="#Vue子组件修改父组件的值-emit-sync-update" class="headerlink" title="Vue子组件修改父组件的值  $emit .sync/update"></a>Vue子组件修改父组件的值  $emit .sync/update</h2><h2 id="基于轮询或websocket长连接的扫码功能的实现-长轮询（时间到了自动关闭连接）"><a href="#基于轮询或websocket长连接的扫码功能的实现-长轮询（时间到了自动关闭连接）" class="headerlink" title="基于轮询或websocket长连接的扫码功能的实现 长轮询（时间到了自动关闭连接）"></a>基于轮询或websocket长连接的扫码功能的实现 长轮询（时间到了自动关闭连接）</h2><h2 id="单点登录-根据新开地址栏获取token"><a href="#单点登录-根据新开地址栏获取token" class="headerlink" title="单点登录 根据新开地址栏获取token"></a>单点登录 根据新开地址栏获取token</h2><h2 id="Promise-解决回调地狱，链式调用，实现异步函数同步调用-all-race-then-catch-是原型上的方法"><a href="#Promise-解决回调地狱，链式调用，实现异步函数同步调用-all-race-then-catch-是原型上的方法" class="headerlink" title="Promise 解决回调地狱，链式调用，实现异步函数同步调用 .all .race .then/.catch 是原型上的方法"></a>Promise 解决回调地狱，链式调用，实现异步函数同步调用 .all .race .then/.catch 是原型上的方法</h2><h2 id="Vue-render函数？？？？？？？？？？？？？？？？"><a href="#Vue-render函数？？？？？？？？？？？？？？？？" class="headerlink" title="Vue render函数？？？？？？？？？？？？？？？？"></a>Vue render函数？？？？？？？？？？？？？？？？</h2><h2 id="Vue-中public-和-assets-的异同"><a href="#Vue-中public-和-assets-的异同" class="headerlink" title="Vue 中public 和 assets 的异同"></a>Vue 中public 和 assets 的异同</h2><h2 id="async和promise的区别"><a href="#async和promise的区别" class="headerlink" title="async和promise的区别"></a>async和promise的区别</h2><p>1、async函数返回值时promise对象  2.Promise.then成功对应await 3、Promsie。catch异常情况对应try catch 4、async是基于promise实现的 5、更符合同步语义</p>
+<p>uni-app 多端开发 options开发模式<br>View Ui vue UI框架</p>
+<h2 id="Vue-项目中实现锚点定位"><a href="#Vue-项目中实现锚点定位" class="headerlink" title="Vue 项目中实现锚点定位"></a>Vue 项目中实现锚点定位</h2><p>1、 scrollTop = offsetTop<br>2、scrollIntoView()</p>
+<h2 id="axios-解决跨域？？？？？？？？？？？"><a href="#axios-解决跨域？？？？？？？？？？？" class="headerlink" title="axios 解决跨域？？？？？？？？？？？"></a>axios 解决跨域？？？？？？？？？？？</h2><h2 id="关于XHR中的responseType-Blob-ArrayBuffer"><a href="#关于XHR中的responseType-Blob-ArrayBuffer" class="headerlink" title="关于XHR中的responseType Blob   ArrayBuffer"></a>关于XHR中的responseType Blob   ArrayBuffer</h2><p>通过window.URL.createObjectURL方法可以把一个blob转化为一个Blob URL，用做图片显示的链接。</p>
+<h2 id="web前端性能优化总结"><a href="#web前端性能优化总结" class="headerlink" title="web前端性能优化总结"></a>web前端性能优化总结</h2><p>1、减少http请求，合理设置 HTTP缓存<br>减少http的主要手段是合并CSS、合并javascript、合并图片，很少变化的图片资源可以直接通过 HTTP Header中的Expires设置一个很长的过期头<br>2、启用压缩 HTML、CSS、javascript文件启用GZip压缩 webpack<br>3、LazyLoad<br>4、CSS放在页面最上部，javascript放在页面最下面<br>5、异步请求Callback(放在定时器里)</p>
+<h2 id="rem布局"><a href="#rem布局" class="headerlink" title="rem布局"></a>rem布局</h2><p>用 100vw / 设计图尺寸缩小100倍</p>
+<p>按照750宽度的设计稿  就是100vw / 7.5</p>
+<p>按照650宽度的设计稿  就是100vw / 6.5</p>
+<p>1rem = 100px;</p>
+<p>html{<br>    font-size: calc(100vw / 7.5);</p>
+<h2 id="http状态码"><a href="#http状态码" class="headerlink" title="http状态码"></a>http状态码</h2><p>2xx：操作成功<br>3xx：重定向<br>4xx：客户端错误<br>5xx：服务器错误</p>
+<h2 id="parcel-Vite-ant-design-nuxt-js"><a href="#parcel-Vite-ant-design-nuxt-js" class="headerlink" title="parcel Vite ant design nuxt.js"></a>parcel Vite ant design nuxt.js</h2><h2 id="nuxt-js-Nuxt-js-是一个基于-Vue-js-的通用应用框架-服务端渲染"><a href="#nuxt-js-Nuxt-js-是一个基于-Vue-js-的通用应用框架-服务端渲染" class="headerlink" title="nuxt.js Nuxt.js 是一个基于 Vue.js 的通用应用框架 服务端渲染"></a>nuxt.js Nuxt.js 是一个基于 Vue.js 的通用应用框架 服务端渲染</h2><p>利于seo,一般购物类网站都需要seo优化 首屏渲染速度更快<br>原因是:服务端渲染只需要进行一次网络请求,而客户端渲染需要先请求运行所需文件,运行之后再进行网络请求数据,然后加载页面<br>对于服务器要求比客户端渲染高<br>seo: titie标签 meta：keywords description</p>
+<p>在config配置文件中配置 1、ip端口<br> 2、添加css 清除默认样式（css或者link里面配置）<br> 3、components、page文件下面的vue文件可以自动生成路由 使用可以直接使用，不用引入<br> 4、安装proxy代理插件<br> 5、ssr服务器渲染  异步请求数据 页面渲染之前拿到服务器的数据 获取完之后再显示页面内容<br> 使用asyncData方法</p>
+<p> 一个由服务端渲染的 Vue.js 应用也可以被认为是“同构的”(Isomorphic) 或“通用的”(Universal)，因为应用的大部分代码同时运行在服务端和客户端。vue-server-renderer方法</p>
+<h2 id="lodash-防抖节流-深拷贝"><a href="#lodash-防抖节流-深拷贝" class="headerlink" title="lodash 防抖节流 深拷贝"></a>lodash 防抖节流 深拷贝</h2><h2 id="缓存表单记录-（复杂表单）-最近十次"><a href="#缓存表单记录-（复杂表单）-最近十次" class="headerlink" title="缓存表单记录 （复杂表单） 最近十次"></a>缓存表单记录 （复杂表单） 最近十次</h2><p>实现原理：点击跳转按钮，将 $data 数据保存在 localStorage 中，当再次返回此页面时，利用 Object.assign 将 localStorage 中的数据与此页面中的 $data 进行合并，并渲染页面，以达到页面缓存效果</p>
+<keep-alive>
+
+<h2 id="flex-页面切换布局-组件切换-动画"><a href="#flex-页面切换布局-组件切换-动画" class="headerlink" title="flex 页面切换布局  组件切换 动画"></a>flex 页面切换布局  组件切换 动画</h2><h2 id="虚拟列表-旨在解决数据量庞大时浏览器渲染性能瓶颈-使用分页和过滤器代替"><a href="#虚拟列表-旨在解决数据量庞大时浏览器渲染性能瓶颈-使用分页和过滤器代替" class="headerlink" title="虚拟列表 旨在解决数据量庞大时浏览器渲染性能瓶颈  使用分页和过滤器代替"></a>虚拟列表 旨在解决数据量庞大时浏览器渲染性能瓶颈  使用分页和过滤器代替</h2><p>只渲染可视化区域内的列表，滚动事件监听，计算每个item高度， 计算滚动的距离， 计算startImdex endIndex ，做数据截取，展示截取后的数据， 同时做样式绝对定位就可以 （top值就可以改变处于的高度）<br>splice和slice的区别:slice的操作不影响原数组。会返回所选择的元素。splice往数组中指定位置添加或删除元素,会影响原数组。返回被删除的元素</p>
+<h2 id="table强缓存"><a href="#table强缓存" class="headerlink" title="table强缓存"></a>table强缓存</h2><p>expires有问题 它的值是一个GMT格式的绝对时间字符串。<br>​Response Headers 响应头 ，它的值是一个相对时间。 Cache-Control优先级更高<br>前端缓存之HTTP缓存(强缓存+协商缓存) cache-control: public, max-age=3600, s-maxage=3600<br>两者是​​cache-control​​的主要手段, 它们是一个数字, 表示资源过了多少秒后变为无效。在浏览器中, ​​max-age​​和​​s-maxage​​都起作用, 而且​​s-maxage​​的优先级高于​​max-age​​。在代理服务器中, 只有​​s-maxage​​起作用。可以通过设置​​max-age​​为0表示立即过期来向服务器请求资源</p>
+<p>此时返回的是304, 这就是协商缓存</p>
+<p>从输⼊URL到⻚⾯加载完中间发⽣了什么？<br>1 构建请求<br>2 查找强缓存，如果不是强缓存，则查找是否是协商缓存。<br>3 DNS 解析<br>4 TCP 连接<br>5 发送 HTTP 请求<br>6 服务器处理请求并返回需要的数据（网络响应）<br>7 浏览器解析渲染页面<br>8 连接结束</p>
+
       
     </div>
     <footer class="article-footer">
@@ -438,7 +511,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Vue2-JS/" style="font-size: 10px;">Vue2 JS</a> <a href="/tags/Vue2-Vuex-Vue-router/" style="font-size: 10px;">Vue2 Vuex Vue-router</a> <a href="/tags/Vue3/" style="font-size: 10px;">Vue3</a> <a href="/tags/Vue3%E3%80%81react/" style="font-size: 10px;">Vue3、react</a>
+      <a href="/tags/Vue2-JS/" style="font-size: 10px;">Vue2 JS</a> <a href="/tags/Vue2-Vuex-Vue-router/" style="font-size: 20px;">Vue2 Vuex Vue-router</a> <a href="/tags/Vue3/" style="font-size: 10px;">Vue3</a> <a href="/tags/Vue3%E3%80%81react/" style="font-size: 10px;">Vue3、react</a>
     </div>
   </div>
 
@@ -464,6 +537,10 @@
           </li>
         
           <li>
+            <a href="/2022/10/25/%E5%BD%B1%E5%83%8F%E9%A1%B9%E7%9B%AE%E6%80%BB%E7%BB%93/">关于影像项目的复盘</a>
+          </li>
+        
+          <li>
             <a href="/2022/10/25/react-books/">react</a>
           </li>
         
@@ -473,10 +550,6 @@
         
           <li>
             <a href="/2022/10/20/%E9%9D%A2%E8%AF%95%E6%80%BB%E7%BB%93/">面试总结</a>
-          </li>
-        
-          <li>
-            <a href="/2021/10/25/Vue2/">一些关于Vue2的笔记</a>
           </li>
         
       </ul>
